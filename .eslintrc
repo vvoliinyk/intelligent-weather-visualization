@@ -1,0 +1,147 @@
+{
+  "env": {
+    "cypress/globals": true,
+    "es6": true,
+    "jest/globals": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended",
+    "plugin:import/typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@getify/proper-arrows",
+    "@typescript-eslint",
+    "cypress",
+    "jest",
+    "prettier",
+    "react-hooks",
+    "react",
+    "sort-destructure-keys",
+    "sort-keys-fix",
+    "typescript-sort-keys",
+    "import",
+    "unused-imports",
+    "sort-export-all"
+  ],
+  "ignorePatterns": ["**/node_modules/**", "/packages/*/{build,dist}", "packages/client/src/gql/generated/**", "packages/common/src/graphql/generated/**"],
+  "rules": {
+    "@getify/proper-arrows/name": ["off"],
+    "@getify/proper-arrows/params": ["off"],
+    "@getify/proper-arrows/return": ["off"],
+    "@getify/proper-arrows/this": ["off"],
+    "@getify/proper-arrows/where": ["off"],
+    "object-shorthand": ["off"],
+    "no-constant-condition": ["off"],
+    "unused-imports/no-unused-imports": ["warn"],
+    "@typescript-eslint/consistent-type-imports": "warn",
+    "@typescript-eslint/no-var-requires": "warn",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "args": "all", "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
+    ],
+    "@typescript-eslint/no-use-before-define": ["warn", { "functions": false, "classes": false }],
+    "@typescript-eslint/no-namespace": "off",
+    "eslint@typescript-eslint/no-empty-function": ["off"],
+    "import/no-cycle": ["off"],
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/no-duplicates": [
+      "warn",
+      {
+        "considerQueryString": true
+      }
+    ],
+    "no-else-return": ["warn"],
+    "no-empty-interface": 0,
+    "no-unused-vars": ["off"],
+    "no-warning-comments": ["warn", { "terms": ["FIXME:"], "location": "anywhere" }],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "CallExpression[callee.property.name='reduce'] ReturnStatement > ObjectExpression > SpreadElement",
+        "message": "Avoid object spread in reduce return - use acc[key]=value for O(n) instead of O(n²). Creates excessive memory allocations and can freeze the event loop."
+      },
+      {
+        "selector": "CallExpression[callee.property.name='reduce'] ReturnStatement > ArrayExpression > SpreadElement",
+        "message": "Avoid array spread in reduce return - use acc.push() for O(n) instead of O(n²). Creates excessive memory allocations and can freeze the event loop."
+      },
+      {
+        "selector": "CallExpression[callee.property.name=/^(filter|some|every)$/] CallExpression[callee.property.name='includes'][callee.object.type='Identifier'][callee.object.name=/^(arr|array|items|list|ids|options|values|elements)/i]",
+        "message": "Avoid array.includes() in array methods - use Set.has() for O(n+m) instead of O(n×m). Convert array to Set before the operation. Note: string.includes() for substring checks is fine."
+      },
+      {
+        "selector": "CallExpression[callee.property.name=/^(filter|some|every)$/] CallExpression[callee.property.name='indexOf']",
+        "message": "Avoid .indexOf() in array methods - use Set.has() for O(n+m) instead of O(n×m). Convert array to Set before the operation."
+      }
+    ],
+    "prettier/prettier": ["warn", { "arrowParens": "avoid" }],
+    "react/no-unknown-property": ["off"],
+    "react/prop-types": ["off"],
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "callbacksLast": true,
+        "shorthandFirst": true,
+        "reservedFirst": true
+      }
+    ],
+    "react-hooks/exhaustive-deps": "warn",
+    "sort-destructure-keys/sort-destructure-keys": "warn",
+    "sort-export-all/sort-export-all": ["warn", "asc", { "caseSensitive": true, "natural": true }],
+    "sort-imports": ["warn", { "ignoreCase": true, "ignoreDeclarationSort": true }],
+    "sort-keys-fix/sort-keys-fix": ["warn", "asc", { "natural": true }],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "typescript-sort-keys/interface": [
+      "warn",
+      "asc",
+      { "caseSensitive": false, "natural": true, "requiredFirst": true }
+    ],
+    "typescript-sort-keys/string-enum": [
+      "warn",
+      "asc",
+      { "caseSensitive": false, "natural": true }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "overrides": [
+    {
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "rules": {
+        "@graphql-eslint/known-type-names": "warn",
+        "@graphql-eslint/no-unreachable-types": "warn"
+      },
+      "parserOptions": {
+        "schema": "./packages/common/src/graphql/schema/**/*.graphql"
+      }
+    }
+  ]
+}
