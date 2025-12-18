@@ -1,12 +1,17 @@
 
-import './App.css'
-import DniproMap from './MapPage'
+import './App.css';
+import { DniproMap, Header, Legend } from './components';
 
-function App() {
-
+export default function App() {
   return (
-    <DniproMap />
-  )
+    <div className="app-container">
+      <Header />
+      <div className="main-content">
+        <div className="map-container">
+          <DniproMap />
+        </div>
+        <Legend />
+      </div>
+    </div>
+  );
 }
-
-export default App
