@@ -26,3 +26,14 @@ export function valueToColor(value: number): string {
   // < 0.3 : чорний
   return '#000000';
 }
+
+export function formatTime(minutes: number): string {
+  if (minutes < 60) {
+    return `${minutes} хв`;
+  }
+
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+
+  return m === 0 ? `${h} год` : `${h} год ${m} хв`;
+}

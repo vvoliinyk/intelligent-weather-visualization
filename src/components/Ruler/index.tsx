@@ -1,3 +1,4 @@
+import L from "leaflet";
 import { useEffect, useState } from "react";
 import { Polyline, Popup, useMapEvents } from "react-leaflet";
 
@@ -14,7 +15,7 @@ import { Polyline, Popup, useMapEvents } from "react-leaflet";
           setRulerPoints([[e.latlng.lat, e.latlng.lng]]);
           setRulerDistance(null);
         } else if (rulerPoints.length === 1) {
-          const newPoints = [...rulerPoints, [e.latlng.lat, e.latlng.lng]];
+          const newPoints: [number, number][] = [...rulerPoints, [e.latlng.lat, e.latlng.lng]];
           setRulerPoints(newPoints);
 
           const [p1, p2] = newPoints;
@@ -47,7 +48,7 @@ import { Polyline, Popup, useMapEvents } from "react-leaflet";
         }}
         style={{
           position: 'absolute',
-          top: 10,
+          top: 90,
           left: 10,
           zIndex: 1000,
           padding: '0.5em 1em',
@@ -58,7 +59,7 @@ import { Polyline, Popup, useMapEvents } from "react-leaflet";
           cursor: 'pointer'
         }}
       >
-        {rulerMode ? 'Вимкнути лінійку' : 'Увімкнути лінійку'}
+        {'лінійка'}
       </button>
         {rulerPoints.length > 1 && (
           <>
