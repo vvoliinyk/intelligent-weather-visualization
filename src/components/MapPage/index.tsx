@@ -112,7 +112,7 @@ const onEachFeature = (feature: GeoJsonFeature, layer: any) => {
             data={geoData[timeIndex]}
             style={(feature) => ({
               color: valueToColor(feature?.properties?.value),
-              weight: 2,
+              weight: 0.1,
               fillOpacity: 0.5,
             })}
             onEachFeature={onEachFeature} // додаємо попапи
